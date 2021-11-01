@@ -1,6 +1,5 @@
 v1.0: Initial script
 
-
 v1.1: Minor formatting and phrasing adjustments 
   **Changes:**
 	-Removed the extra words from the last sentence ("the last couple days")
@@ -8,10 +7,58 @@ v1.1: Minor formatting and phrasing adjustments
 	-Added in a missing parentheses (after the Swish link)
 	-Altered the Swish link to use their weather URL instead of the general game/linup one 
 	-Added in point 3, with info about what an italicized matchup means (for double-headers)
+
+v1.2: Minor formatting and phrasing adjustments 
+  **Changes:**
+	-Updated season data to use 2021 endpoint
+	-Updated the FiveThirtyEight description with an additional link and information
+	-Additional minor text adjustments within the footnotes
 	
   **Backlog:**
-	-Set up date parser to auto-select the entered date as the Swish link, for higher accuracy
-	-Figure out how to actually italicize matchups that are double headers, and potentially place them right underneath game 1
-	-Pull in weather data at the end of the program
+	-Build in weather POC into primary script
+	-Figure out how to actually italicize matchups that are double headers, and place them right underneath game 1
 	-Auto-pull in winning percentages from https://github.com/fivethirtyeight/data/tree/master/mlb-elo ; could potentially use https://www.twilio.com/blog/2016/08/fivethirtyeight-data-in-python.html for a method
 	
+v1.3: Added FiveThirtyEight Percentages
+  **Changes:**
+	-Winning percentages now populated from FiveThirtyEight instead of the statsapi (via pandas dataframe)
+	-Additional minor adjustments
+	
+  **Backlog:**
+	-Build in weather POC into primary script
+	-Figure out how to actually italicize matchups that are double headers
+
+  **Bugs:**
+	-Program fails to run if a double-header is occurring that day
+
+v1.4: Resolved double-header bug and improved FiveThirtyEight percentage functions
+  **Changes:**
+	-Functions added to check if a team is scheduled for a double header, using their first/second game's win probabilities appropriately
+	-Slimmed down the print statements and made additional minor cleanup adjustments
+	
+  **Backlog:**
+	-Build in weather POC into primary script
+	-Figure out how to actually italicize matchups that are double headers
+	-Build in better error handling
+	-Automate list of matches with the widest margins (for poll questions)
+
+v1.5: Added in automated poll options
+  **Changes:**
+	-Collates heaviest 538 favorites (by percentage), then prints of the top 10 most favorited matchups
+	-Slimmed down the replacer formatting and made additional minor text adjustments
+	
+  **Backlog:**
+	-Build in weather POC into primary script
+	-Figure out how to actually italicize matchups that are double headers
+	-Build in better error handling
+
+v2.0: Major refactor: Script now processed as a function within a Flask App, hosted on Heroku
+  **Changes:**
+	-Major refactor completed (2.x), migrating the app from CLI-use-only (v1.x) to a version that can be used by anyone with access to a web browser, at pickemscriptapp.herokuapp.com
+	-Associated formatting changes to reflect move to text displaying in HTML (instead of in a terminal) adjusted accordingly
+	-New major feature: 'Weather Report' section that checks all eligble stadiums (i.e., would be impacted by rain) for an openweather PoP percentage >35% over the ~3 hours of a matchup.
+	-All (known) bugs resulting in catastrophic failures of the script when endpoints returned null or empty values now resolved, letting the script either continue or terminate gracefully (depending on what info still needs to be displayed); includes past-day crash, no-games crash, postponed-game crash, etc.
+	
+  **Backlog:**
+	-Add single asteriks for matchups that are double headers [trivial priority]
+	-Add double asteriks for matchups potentially affected by weather [trivial priority]
